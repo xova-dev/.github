@@ -27,4 +27,6 @@ Configure npm Trusted Publishing separately for each package:
 - Environment: `npm-publish`
 
 The shared workflow uses GitHub OIDC and intentionally does not require `NPM_TOKEN` or `NODE_AUTH_TOKEN`.
+Projects should commit a `mise.toml` containing the Node.js and pnpm versions used by development and CI.
+The package should also declare its pnpm version through the `packageManager` field in `package.json`.
 It also runs verification before publishing by default; projects can override the workflow inputs when needed.

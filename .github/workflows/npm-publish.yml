@@ -3,16 +3,6 @@ name: Publish package to npm
 on:
   workflow_call:
     inputs:
-      node-version:
-        description: Node.js version used for verification and publishing
-        required: false
-        type: string
-        default: "22.14.0"
-      pnpm-version:
-        description: pnpm version used by the project
-        required: false
-        type: string
-        default: "11.5.1"
       working-directory:
         description: Directory containing the package or workspace
         required: false
@@ -53,16 +43,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v5
+      - name: Setup mise
+        uses: jdx/mise-action@v2
         with:
-          node-version: ${{ inputs.node-version }}
-          registry-url: https://registry.npmjs.org
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: ${{ inputs.pnpm-version }}
+          cache: true
 
       - name: Show tool versions
         run: |
