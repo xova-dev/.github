@@ -1,0 +1,83 @@
+name: Publish package to npm
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        description: Node.js version used for verification and publishing
+        required: false
+        type: string
+        default: "22.14.0"
+      pnpm-version:
+        description: pnpm version used by the project
+        required: false
+        type: string
+        default: "11.5.1"
+      working-directory:
+        description: Directory containing the package or workspace
+        required: false
+        type: string
+        default: "."
+      install-command:
+        description: Dependency installation command
+        required: false
+        type: string
+        default: pnpm install --frozen-lockfile
+      verify-command:
+        description: Checks to run before publishing; leave empty to skip
+        required: false
+        type: string
+        default: pnpm lint && pnpm typecheck && pnpm test && pnpm build
+      publish-command:
+        description: npm publishing command
+        required: false
+        type: string
+        default: npm publish --access public
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    name: Verify and publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: npm-publish
+
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: ${{ inputs.node-version }}
+          registry-url: https://registry.npmjs.org
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ inputs.pnpm-version }}
+
+      - name: Show tool versions
+        run: |
+          node --version
+          npm --version
+          pnpm --version
+
+      - name: Install dependencies
+        run: ${{ inputs.install-command }}
+
+      - name: Verify package
+        if: ${{ inputs.verify-command != '' }}
+        run: ${{ inputs.verify-command }}
+
+      # npm Trusted Publishing uses GitHub's OIDC identity. Do not add an
+      # NPM_TOKEN or NODE_AUTH_TOKEN here.
+      - name: Publish to npm
+        run: ${{ inputs.publish-command }}

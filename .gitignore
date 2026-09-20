@@ -1,0 +1,29 @@
+# OS files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editor and IDE files
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+*.swp
+*.swo
+
+# Local dependencies and build output
+node_modules/
+dist/
+build/
+coverage/
+
+# Local environment and temporary files
+.env
+.env.*
+!.env.example
+*.log
+tmp/
+temp/
