@@ -1,0 +1,47 @@
+[
+  {
+    "name": "bug",
+    "color": "d73a4a",
+    "description": "Something is not working / 功能异常"
+  },
+  {
+    "name": "enhancement",
+    "color": "a2eeef",
+    "description": "New feature or improvement / 新功能或改进"
+  },
+  {
+    "name": "documentation",
+    "color": "0075ca",
+    "description": "Documentation updates / 文档更新"
+  },
+  {
+    "name": "question",
+    "color": "d876e3",
+    "description": "Questions or clarification / 问题咨询或澄清"
+  },
+  {
+    "name": "dependencies",
+    "color": "0366d6",
+    "description": "Dependency updates / 依赖更新"
+  },
+  {
+    "name": "duplicate",
+    "color": "cfd3d7",
+    "description": "Already reported; link the original / 重复问题，请关联原始条目"
+  },
+  {
+    "name": "help wanted",
+    "color": "008672",
+    "description": "Community contributions welcome / 欢迎社区协助"
+  },
+  {
+    "name": "invalid",
+    "color": "e4e669",
+    "description": "Invalid report; explain the reason / 无效问题，请说明原因"
+  },
+  {
+    "name": "wontfix",
+    "color": "ffffff",
+    "description": "Not planned; explain the decision / 不计划处理，请说明原因"
+  }
+]
