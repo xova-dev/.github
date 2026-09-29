@@ -18,7 +18,7 @@ Once published on the default branch of this public `.github` repository, suppor
 
 The English `CONTRIBUTING.md` is the default entry point and links explicitly to the Chinese guide in this repository. Contributors may use either language.
 
-`labels.json` records the nine agreed label names, colors, and bilingual descriptions. It is a reference manifest, not a GitHub-native configuration file, and does not synchronize labels automatically. Configure organization default labels separately for newly created repositories. Existing repositories require a separate, explicitly scoped update; do not delete existing labels without reviewing their usage.
+`labels.json` records twelve shared labels: nine general labels and three priority labels, with colors and bilingual descriptions. It is a reference manifest, not a GitHub-native configuration file, and does not synchronize labels automatically. Configure organization default labels separately for newly created repositories. Existing repositories require a separate, explicitly scoped update; do not delete existing labels without reviewing their usage.
 
 The `bug` and `enhancement` labels must exist in repositories using the issue templates for automatic labeling to work.
 

@@ -43,5 +43,20 @@
     "name": "wontfix",
     "color": "ffffff",
     "description": "Not planned; explain the decision / 不计划处理，请说明原因"
+  },
+  {
+    "name": "priority: high",
+    "color": "b60205",
+    "description": "Blocks key work; address first / 阻塞关键工作，优先处理"
+  },
+  {
+    "name": "priority: medium",
+    "color": "fbca04",
+    "description": "Normal priority; schedule as planned / 常规优先级，按计划处理"
+  },
+  {
+    "name": "priority: low",
+    "color": "c2e0c6",
+    "description": "Non-urgent; address when capacity allows / 非紧迫，有余力再处理"
   }
 ]

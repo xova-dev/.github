@@ -25,6 +25,14 @@
 
 通用标签为 bug、enhancement、documentation、question、dependencies、duplicate、help wanted、invalid 和 wontfix，由维护者按需添加。duplicate 应关联原始 Issue，help wanted 表示欢迎社区协助。以 invalid 或 wontfix 关闭问题时，请简要说明原因；信息不完整不一定代表问题无效，必要时先请求补充信息。
 
+### 优先级
+
+- `priority: high`：阻塞关键工作，需要优先处理。
+- `priority: medium`：常规优先级，按计划处理。
+- `priority: low`：非紧迫改进，有余力再处理。
+
+由维护者为每个 Issue 设置最多一个优先级标签。未标记表示尚未定级，不默认视为 medium。优先级表示处理顺序，而非严重程度；bug 不自动意味着高优先级。Issue 模板不自动添加优先级标签。
+
 ## 安全问题
 
 不要通过公开 Issue 或 PR 报告安全漏洞。请遵循目标仓库的 SECURITY.md，或使用仓库已启用的私密漏洞报告入口。两者均不存在时，请先向维护者询问私密反馈渠道，不要披露漏洞细节。

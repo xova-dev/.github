@@ -25,6 +25,14 @@ Follow repository-specific commit conventions. If none are defined, use Conventi
 
 The shared label set is bug, enhancement, documentation, question, dependencies, duplicate, help wanted, invalid, and wontfix. Maintainers apply labels as appropriate. Use duplicate with a link to the original issue, and help wanted when community assistance is welcome. When closing an issue as invalid or wontfix, briefly explain the reason; an incomplete report alone is not necessarily invalid—ask for clarification when needed.
 
+### Priority
+
+- `priority: high`: blocks key work and should be addressed first.
+- `priority: medium`: normal priority, scheduled as planned.
+- `priority: low`: non-urgent work to address when capacity allows.
+
+Maintainers assign at most one priority label per issue. No priority label means the issue has not yet been prioritized, not that it is medium priority. Priority describes work order rather than severity; a bug is not automatically high priority. Issue templates do not assign priority labels automatically.
+
 ## Security
 
 Do not report vulnerabilities in public issues or pull requests. Follow the target repository's SECURITY.md or use its private vulnerability reporting option if available. If neither exists, ask a maintainer for a private reporting channel without disclosing vulnerability details.
