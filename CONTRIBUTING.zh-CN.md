@@ -7,9 +7,11 @@
 ## Issue
 
 - 提交前先搜索已有 Issue。
-- 可复现的问题使用 Bug 报告，包含复现步骤、预期与实际行为，以及相关环境信息。
+- 请选择中文或英文 Issue 表单。Bug 报告应包含预期与实际行为、受影响版本和复现步骤；暂时无法稳定复现时，说明已知触发条件。
 - 功能建议应说明问题、期望行为和替代方案。较大改动请先讨论，再开始实现。
 - 日志和示例中请移除凭据、个人信息及私密数据。
+
+表单会设置 `Bug` 或 `Feature` 类型，并保留 `bug` 或 `enhancement` 标签；优先级由维护者另行判断。不适合表单的使用问题或文档反馈请参阅[支持指南](https://github.com/xova-dev/.github/blob/main/SUPPORT.md)，仍可新建空白 Issue。
 
 ## Pull Request
 
@@ -35,7 +37,7 @@
 
 ## 安全问题
 
-不要通过公开 Issue 或 PR 报告安全漏洞。请遵循目标仓库的 SECURITY.md，或使用仓库已启用的私密漏洞报告入口。两者均不存在时，请先向维护者询问私密反馈渠道，不要披露漏洞细节。
+不要通过公开 Issue 或 PR 报告安全漏洞。请遵循目标仓库的安全政策；没有专属政策时，遵循[组织默认政策](https://github.com/xova-dev/.github/blob/main/SECURITY.md)。在受影响仓库中使用 **Security → Advisories → Report a vulnerability** 私密报告。如果入口不可用，请向维护者询问私密渠道，不要披露漏洞细节。
 
 ## 协作
 

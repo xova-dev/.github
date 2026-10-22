@@ -8,13 +8,13 @@ Why is this change needed? Link related issues where relevant. -->
 
 ## 主要变化 / Changes
 
-<!-- 概述主要变化，保持单一关注点。
-Summarize the main changes and keep the scope focused. -->
+<!-- 概述主要变化，保持单一关注点；行为变化请说明修改前后的差异。
+Summarize the main changes and keep the scope focused; describe before/after behavior when it changes. -->
 
 ## 验证情况 / Verification
 
-<!-- 列出已执行的检查及结果；说明未验证的部分和原因。
-List checks performed and their results; explain what was not verified and why. -->
+<!-- 列出已执行的检查及结果；说明未验证的部分和原因。涉及 UI 时附上相关截图或录屏。
+List checks performed and their results; explain what was not verified and why. Include relevant screenshots or recordings for UI changes. -->
 
 ## 风险 / Risks
 

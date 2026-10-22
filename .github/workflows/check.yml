@@ -1,0 +1,21 @@
+name: Check community files
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - name: Check community files and checker regressions
+        run: |
+          ruby scripts/check-community.rb
+          ruby tests/check-community-test.rb

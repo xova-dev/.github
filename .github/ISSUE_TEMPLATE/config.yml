@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Help and project navigation / 帮助与项目导航
+    url: https://github.com/xova-dev/.github/blob/main/SUPPORT.md
+    about: Find project documentation and the right place to ask questions. / 查找项目文档和提问入口。
+  - name: Security vulnerability / 安全漏洞
+    url: https://github.com/xova-dev/.github/blob/main/SECURITY.md
+    about: Report privately in the affected repository. / 请在受影响仓库中私密报告。

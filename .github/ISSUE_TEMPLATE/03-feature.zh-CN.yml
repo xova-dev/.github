@@ -1,0 +1,44 @@
+name: 功能建议（中文）
+description: 提出新功能或改进建议。
+type: Feature
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        请先搜索已有 Issue，并确认正在受影响项目的仓库中提交。不要包含凭据或私密数据。安全漏洞请勿公开提交，请查看 [安全政策](https://github.com/xova-dev/.github/blob/main/SECURITY.md)。
+  - type: textarea
+    id: problem
+    attributes:
+      label: 问题或使用场景
+      description: 谁需要这个功能？目前遇到了什么问题？
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: 期望目标
+      description: 描述希望实现的行为或结果，无需先设计实现方案。
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: 建议方案
+      description: 如果已有想法，请描述；也可以留空。
+    validations:
+      required: false
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 替代方案
+      description: 说明考虑过的替代方案或当前的临时解决办法。
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: 补充信息
+      description: 按需提供示例、截图或相关约束，移除敏感数据。
+    validations:
+      required: false

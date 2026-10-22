@@ -1,0 +1,66 @@
+name: Bug report (English)
+description: Report unexpected behavior or a suspected defect.
+type: Bug
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Search existing issues first and submit in the affected project repository. Do not include credentials or private data. Do not report vulnerabilities publicly; follow the [security policy](https://github.com/xova-dev/.github/blob/main/SECURITY.md).
+  - type: textarea
+    id: actual
+    attributes:
+      label: What happened?
+      description: Describe the unexpected behavior and its impact.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce or known triggers
+      description: List steps and relevant inputs. If reproduction is intermittent, describe the known conditions.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Project version / commit
+      description: Provide the affected version or commit, or explain if it is unknown.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include relevant OS, runtime, browser and configuration details without credentials.
+    validations:
+      required: false
+  - type: input
+    id: reproduction-link
+    attributes:
+      label: Minimal reproduction link
+      description: Optional; do not publish private code or sensitive data.
+    validations:
+      required: false
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: Include relevant excerpts only; remove tokens, personal information and other sensitive data.
+      render: text
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: Screenshots and additional context
+      description: Attach screenshots or describe workarounds and other useful context.
+    validations:
+      required: false

@@ -7,9 +7,11 @@ Contributions in English or Chinese are welcome. These are organization-wide def
 ## Issues
 
 - Search existing issues before opening a new one.
-- Use a bug report for reproducible problems. Include reproduction steps, expected and actual behavior, and relevant environment details.
+- Choose a Chinese or English issue form. Bug reports should include expected and actual behavior, the affected version, and reproduction steps or known triggers if reproduction is intermittent.
 - Use a feature request to explain the problem, proposed behavior, and alternatives. Discuss substantial changes before implementing them.
 - Remove credentials, personal information, and private data from logs and examples.
+
+Forms set the `Bug` or `Feature` issue type and the existing `bug` or `enhancement` label. Maintainers determine priority separately. For questions or documentation feedback that do not fit a form, see the [support guide](https://github.com/xova-dev/.github/blob/main/SUPPORT.md); blank issues remain available.
 
 ## Pull requests
 
@@ -35,7 +37,7 @@ Maintainers assign at most one priority label per issue. No priority label means
 
 ## Security
 
-Do not report vulnerabilities in public issues or pull requests. Follow the target repository's SECURITY.md or use its private vulnerability reporting option if available. If neither exists, ask a maintainer for a private reporting channel without disclosing vulnerability details.
+Do not report vulnerabilities in public issues or pull requests. Follow the target repository's security policy, or the [organization policy](https://github.com/xova-dev/.github/blob/main/SECURITY.md) when it has no override. Use **Security → Advisories → Report a vulnerability** in the affected repository. If unavailable, ask a maintainer for a private channel without disclosing vulnerability details.
 
 ## Collaboration
 
