@@ -4,6 +4,24 @@ require 'json'
 require 'yaml'
 
 module CommunityChecks
+  # Repository policy lives here; structural validation below is shared.
+  FORM_GROUPS = {
+    'Bug' => {
+      files: %w[01-bug.zh-CN.yml 02-bug.en.yml], label: 'bug',
+      required: %w[actual expected reproduction version]
+    },
+    'Feature' => {
+      files: %w[03-feature.zh-CN.yml 04-feature.en.yml], label: 'enhancement',
+      required: %w[problem outcome]
+    }
+  }.freeze
+  DOCUMENT_URL = 'https://github.com/xova-dev/.github/blob/main/'.freeze
+  REQUIRED_CONTACTS = %w[SECURITY.md SUPPORT.md].map { |file| DOCUMENT_URL + file }.freeze
+  # Inline links only: plain/angle-bracket destinations, one level of path
+  # parentheses, and optional double-, single- or parenthesis-delimited titles.
+  INLINE_LINK = /\]\(\s*(?:<([^>\n]+)>|([^\s()]+(?:\([^()\s]*\)[^\s()]*)*))
+    (?:\s+(?:"[^"\n]*"|'[^'\n]*'|\([^()\n]*\)))?\s*\)/x.freeze
+
   module_function
 
   def require_valid(condition, message)
@@ -29,7 +47,7 @@ module CommunityChecks
     %w[name description].each do |key|
       require_valid(form[key].is_a?(String) && !form[key].strip.empty?, "#{path}: missing #{key}")
     end
-    expected_label = { 'Bug' => 'bug', 'Feature' => 'enhancement' }[form['type']]
+    expected_label = FORM_GROUPS.dig(form['type'], :label)
     require_valid(expected_label && form['labels'] == [expected_label] && labels.include?(expected_label), "#{path}: invalid type or labels")
     body = form['body']
     require_valid(body.is_a?(Array) && body.length > 1, "#{path}: missing body")
@@ -50,6 +68,7 @@ module CommunityChecks
       %w[label description].each do |key|
         require_valid(attributes[key].is_a?(String) && !attributes[key].strip.empty?, "#{path}: missing field #{key}")
       end
+      require_valid(!attributes.key?('placeholder') || attributes['placeholder'].is_a?(String), "#{path}: placeholder must be a string")
       require_valid(!attributes.key?('render') || (field['type'] == 'textarea' && attributes['render'] == 'text'), "#{path}: invalid render")
       validations = field['validations']
       require_valid(validations.is_a?(Hash) && validations.keys == ['required'] && [true, false].include?(validations['required']), "#{path}: required must be boolean")
@@ -60,39 +79,60 @@ module CommunityChecks
     fields
   end
 
+  def check_link(target, root, source)
+    return if target.start_with?('#')
+
+    if target.start_with?(DOCUMENT_URL)
+      destination = File.join(root, target.delete_prefix(DOCUMENT_URL).split('#').first)
+    else
+      return if target.match?(/\A[a-z][a-z0-9+.-]*:/i) || target.start_with?('//')
+
+      destination = File.expand_path(target.split('#').first, File.dirname(source))
+    end
+    require_valid(File.exist?(destination), "#{source}: missing link #{target}")
+  end
+
+  def check_markdown(text, root, source)
+    text.scan(INLINE_LINK).each { |angle, plain| check_link(angle || plain, root, source) }
+  end
+
   def check(root)
     labels = JSON.parse(File.read(File.join(root, '.github/labels.json'))).map { |label| label.fetch('name') }
     directory = File.join(root, '.github/ISSUE_TEMPLATE')
-    expected = %w[01-bug.zh-CN.yml 02-bug.en.yml 03-feature.zh-CN.yml 04-feature.en.yml config.yml]
+    expected = FORM_GROUPS.values.flat_map { |group| group[:files] } + ['config.yml']
     require_valid(Dir.children(directory).sort == expected.sort, 'Unexpected or missing issue templates')
-    forms = expected[0...4].map { |name| yaml(File.join(directory, name)) }
-    signatures = forms.each_with_index.map { |form, index| check_form(form, labels, expected[index]) }
-    require_valid(forms.map { |form| form['name'] }.uniq.length == 4, 'Duplicate form names')
-    require_valid(signatures[0] == signatures[1] && signatures[2] == signatures[3], 'Bilingual field mismatch')
-    require_valid(forms.map { |form| form['type'] } == %w[Bug Bug Feature Feature], 'Wrong issue types')
-    require_valid(signatures[0].select { |field| field[2] }.map(&:first) == %w[actual expected reproduction version], 'Bug required fields changed')
-    require_valid(signatures[2].select { |field| field[2] }.map(&:first) == %w[problem outcome], 'Feature required fields changed')
+    names = []
+    FORM_GROUPS.each do |type, group|
+      signatures = group[:files].map do |name|
+        path = File.join(directory, name)
+        form = yaml(path)
+        fields = check_form(form, labels, path)
+        require_valid(form['type'] == type, "#{path}: wrong issue type")
+        require_valid(fields.select { |field| field[2] }.map(&:first).sort == group[:required].sort, "#{path}: required fields changed")
+        names << form['name']
+        form['body'].each do |field|
+          field['attributes'].values_at('value', 'description').compact.each do |text|
+            check_markdown(text, root, path)
+          end
+        end
+        fields
+      end
+      require_valid(signatures.uniq.length == 1, "#{type}: Bilingual field mismatch")
+    end
+    require_valid(names.uniq == names, 'Duplicate form names')
     chooser = yaml(File.join(directory, 'config.yml'))
     require_valid(chooser.is_a?(Hash) && chooser.keys.sort == %w[blank_issues_enabled contact_links] && chooser['blank_issues_enabled'] == true, 'Keep blank issues available')
     links = chooser['contact_links']
-    require_valid(links.is_a?(Array) && links.length == 2, 'Expected support and security links')
+    require_valid(links.is_a?(Array), 'Expected contact links')
     links.each do |link|
       require_valid(link.is_a?(Hash) && link.keys.sort == %w[about name url] && link.values.all? { |value| value.is_a?(String) && !value.strip.empty? }, 'Invalid contact link')
+      require_valid(link['url'].match?(/\Ahttps?:\/\/[^\s]+\z/), 'Invalid contact URL')
+      check_link(link['url'], root, File.join(directory, 'config.yml'))
     end
-    require_valid(links.map { |link| link['url'] }.sort == %w[SECURITY.md SUPPORT.md].map { |file| "https://github.com/xova-dev/.github/blob/main/#{file}" }, 'Wrong contact destinations')
+    require_valid((REQUIRED_CONTACTS - links.map { |link| link['url'] }).empty?, 'Wrong contact destinations')
     documents = Dir.glob(File.join(root, '**/*.md'), File::FNM_DOTMATCH).reject { |path| path.include?('/.git/') }
     documents.each do |path|
-      File.read(path).scan(/\]\(([^)]+)\)/).flatten.each do |target|
-        next if target.start_with?('#')
-        prefix = 'https://github.com/xova-dev/.github/blob/main/'
-        if target.start_with?(prefix)
-          destination = File.join(root, target.delete_prefix(prefix).split('#').first)
-        else
-          next if target.match?(/\A[a-z]+:/i)
-          destination = File.expand_path(target.split('#').first, File.dirname(path))
-        end
-        require_valid(File.exist?(destination), "#{path}: missing link #{target}")
-      end
+      check_markdown(File.read(path), root, path)
     end
     true
   end

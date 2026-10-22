@@ -34,4 +34,8 @@ Run `ruby scripts/check-community.rb` using Ruby's standard library; no dependen
 
 After publishing to the default branch, open a consuming repository's **New issue** chooser and preview all four forms without submitting an issue. Verify ordering, types, labels, required fields and attachments; confirm security and support links work. Local checks do not establish GitHub UI rendering or real private report delivery.
 
+Form groups, labels, required field sets and required contact destinations are declared together in the checker. Both translations must keep matching field order and behavior, but may be reordered together. Additional contact links are allowed as long as the support and security destinations remain present.
+
+Link checks cover inline links in Markdown documents and issue-form introductions/descriptions, plus contact URLs targeting this repository. Plain and angle-bracket destinations and optional quoted or parenthesized titles are supported. This is not a full Markdown parser: reference-style links, anchor existence and external URL availability are not checked.
+
 References: [default community health files](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file), [organization default labels](https://docs.github.com/en/organizations/managing-organization-settings/managing-default-labels-for-repositories-in-your-organization).
