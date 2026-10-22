@@ -1,16 +1,14 @@
 # Xova GitHub configuration
 
-Shared GitHub metadata, organization defaults, and reusable workflows for [Xova](https://github.com/xova-dev).
+Organization profile and community defaults for [Xova](https://github.com/xova-dev).
 
-This repository is maintained as organization infrastructure rather than as a standalone product.
+Reusable workflows and release tooling live in [xova-dev/actions](https://github.com/xova-dev/actions). See its [project workflow guide](https://github.com/xova-dev/actions/blob/main/docs/project-workflows.md) for integration.
 
 - Organization profile: [`profile/README.md`](profile/README.md)
 - Issue templates: [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/) (Chinese and English)
 - Pull request template: [`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md) (bilingual)
 - Contributing: [English](CONTRIBUTING.md) / [简体中文](CONTRIBUTING.zh-CN.md)
 - Shared label definitions: [`.github/labels.json`](.github/labels.json)
-- npm publishing workflow: [`.github/workflows/npm-publish.yml`](.github/workflows/npm-publish.yml)
-- npm publishing guide: [`docs/npm-publishing.md`](docs/npm-publishing.md)
 
 ## Organization defaults
 
