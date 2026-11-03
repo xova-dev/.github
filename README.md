@@ -20,7 +20,9 @@ The English `CONTRIBUTING.md` is the default entry point and links explicitly to
 
 `labels.json` lists four optional PR labels with bilingual descriptions: `bug`, `enhancement`, `documentation` and `dependencies`. Use them only for filtering or automation. This reference manifest does not synchronize or delete GitHub labels. Review workflow, bot and release dependencies before cleaning up existing labels.
 
-Two bilingual issue forms select `Bug` or `Feature` without labels; keep these organization types enabled. Each form uses English / Chinese labels and short bilingual descriptions; contributors may answer in either language. Maintainers use the native `Priority` field. Dates and effort are optional. Numbered filenames put Bug before Feature; blank issues remain available for other work.
+Two bilingual issue forms select `Bug` or `Feature` without labels; keep these organization types enabled. Each form uses English / Chinese labels and short bilingual descriptions; contributors may answer in either language. Maintainers use the native `Priority` field. Numbered filenames put Bug before Feature; blank issues remain available for other work.
+
+Only `Priority` is pinned by default, for Bug, Feature, Task and issues without a type. Its visibility is `Public`: anyone who can view the issue can see it. `Start date`, `Target date` and `Effort` remain `Organization only`, are not pinned to any type, and are optional for planning. Unpinning preserves existing values; populated fields can still appear to viewers with access.
 
 Keep native names stable and use short bilingual descriptions in organization settings:
 

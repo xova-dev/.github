@@ -13,7 +13,9 @@ Contributions in English or Chinese are welcome. These are organization-wide def
 
 Forms set the `Bug` or `Feature` type without labels. Use `Task` for other concrete work. For questions or documentation feedback that do not fit a form, see the [support guide](https://github.com/xova-dev/.github/blob/main/SUPPORT.md); blank issues remain available.
 
-Maintainers use the native `Priority` field: `Urgent` for immediate attention, `High` for work to address next, `Medium` for planned work, and `Low` for work when capacity allows. Unset means not yet prioritized. Priority describes work order, not severity. Dates and effort are optional; fill them only when useful for planning.
+Maintainers use the native `Priority` field: `Urgent` for immediate attention, `High` for work to address next, `Medium` for planned work, and `Low` for work when capacity allows. Unset means not yet prioritized. Priority describes work order, not severity.
+
+Only `Priority` is pinned by default and visible to anyone who can view the issue. `Start date`, `Target date` and `Effort` remain `Organization only`, unpinned and optional for planning. Existing values are preserved and may still appear to viewers with access.
 
 Keep context, evidence and constraints in the body; use sidebar fields for type, priority, ownership and scheduling. When closing an issue, explain the decision and link the original if it is a duplicate.
 

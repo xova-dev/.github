@@ -13,7 +13,9 @@
 
 表单设置 `Bug` 或 `Feature` 类型，不添加标签。其他具体工作使用 `Task`。不适合表单的使用问题或文档反馈请参阅[支持指南](https://github.com/xova-dev/.github/blob/main/SUPPORT.md)，仍可新建空白 Issue。
 
-维护者使用原生 `Priority` 字段：`Urgent` 需立即处理，`High` 优先处理，`Medium` 按计划处理，`Low` 有余力再处理。未设置表示尚未定级。优先级表示处理顺序，不等同于严重程度。日期和工作量仅在排期需要时填写。
+维护者使用原生 `Priority` 字段：`Urgent` 需立即处理，`High` 优先处理，`Medium` 按计划处理，`Low` 有余力再处理。未设置表示尚未定级。优先级表示处理顺序，不等同于严重程度。
+
+默认只固定 `Priority`，所有能查看该 Issue 的人均可见。`Start date`、`Target date` 和 `Effort` 保持 `Organization only`，不默认固定，仅在排期需要时填写。已有值保留，仍可能向有权查看的人显示。
 
 正文记录背景、证据与约束；类型、优先级、负责人和排期使用侧栏字段。关闭 Issue 时说明原因；重复问题应关联原始 Issue。
 
