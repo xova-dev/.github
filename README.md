@@ -10,7 +10,6 @@ Reusable workflows and release tooling live in [xova-dev/actions](https://github
 - Contributing: [English](CONTRIBUTING.md) / [简体中文](CONTRIBUTING.zh-CN.md)
 - Support and project navigation: [`SUPPORT.md`](SUPPORT.md) (bilingual)
 - Private vulnerability reporting policy: [`SECURITY.md`](SECURITY.md) (bilingual)
-- Optional PR labels: [`.github/labels.json`](.github/labels.json)
 
 ## Organization defaults
 
@@ -18,7 +17,7 @@ Once published on the default branch of this public `.github` repository, suppor
 
 The English `CONTRIBUTING.md` is the default entry point and links explicitly to the Chinese guide in this repository. Contributors may use either language.
 
-`labels.json` lists four optional PR labels with bilingual descriptions: `bug`, `enhancement`, `documentation` and `dependencies`. Use them only for filtering or automation. This reference manifest does not synchronize or delete GitHub labels. Review workflow, bot and release dependencies before cleaning up existing labels.
+This repository defines no shared label set. Add a repository-specific PR label only for an actual filtering or automation need. Review workflow, bot and release dependencies before removing labels, and preserve issue type and priority in native fields.
 
 Two bilingual issue forms select `Bug` or `Feature` without labels; keep these organization types enabled. Each form uses English / Chinese labels and short bilingual descriptions; contributors may answer in either language. Maintainers use the native `Priority` field. Numbered filenames put Bug before Feature; blank issues remain available for other work.
 
