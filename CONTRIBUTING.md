@@ -7,7 +7,7 @@ Contributions in English or Chinese are welcome. These are organization-wide def
 ## Issues
 
 - Search existing issues before opening a new one.
-- Choose a Chinese or English issue form. Bug reports should include expected and actual behavior, the affected version, and reproduction steps or known triggers if reproduction is intermittent.
+- Choose the bilingual Bug or Feature form and answer in English or Chinese. Bug reports should include expected and actual behavior, the affected version, and reproduction steps or known triggers if reproduction is intermittent.
 - Use a feature request to explain the problem and desired outcome; approaches and alternatives are optional. Discuss substantial changes before implementing them.
 - Remove credentials, personal information, and private data from logs and examples.
 

@@ -29,7 +29,7 @@ class CommunityChecksTest < Minitest::Test
   %w[value description].each do |attribute|
     define_method("test_rejects_broken_form_#{attribute}_link") do
       with_fixture do |root|
-        edit_yaml(root, '02-bug.en.yml') do |form|
+        edit_yaml(root, '01-bug.yml') do |form|
           field = form['body'].find { |item| item['attributes'].key?(attribute) }
           field['attributes'][attribute] = '[Security](https://github.com/xova-dev/.github/blob/main/MISSING.md "Policy")'
         end
@@ -43,7 +43,7 @@ class CommunityChecksTest < Minitest::Test
     %w[input textarea].each do |type|
       define_method("test_rejects_#{name}_placeholder_on_#{type}") do
         with_fixture do |root|
-          edit_yaml(root, '02-bug.en.yml') do |form|
+          edit_yaml(root, '01-bug.yml') do |form|
             form['body'].find { |field| field['type'] == type }['attributes']['placeholder'] = value
           end
           error = assert_raises(ArgumentError) { CommunityChecks.check(root) }
@@ -55,7 +55,7 @@ class CommunityChecksTest < Minitest::Test
 
   def test_accepts_optional_string_placeholders
     with_fixture do |root|
-      edit_yaml(root, '02-bug.en.yml') do |form|
+      edit_yaml(root, '01-bug.yml') do |form|
         form['body'].find { |field| field['type'] == 'input' }['attributes']['placeholder'] = ''
         form['body'].find { |field| field['type'] == 'textarea' }['attributes']['placeholder'] = 'Describe the problem'
       end
@@ -76,7 +76,7 @@ class CommunityChecksTest < Minitest::Test
         [Security](https://github.com/xova-dev/.github/blob/main/SECURITY.md#report-privately "Policy")
       MARKDOWN
       File.open(File.join(root, 'README.md'), 'a') { |file| file.puts examples }
-      edit_yaml(root, '02-bug.en.yml') do |form|
+      edit_yaml(root, '01-bug.yml') do |form|
         form['body'][0]['attributes']['value'] = '[Policy](https://github.com/xova-dev/.github/blob/main/SECURITY.md "Security policy")'
         form['body'][1]['attributes']['description'] = '[Support](https://github.com/xova-dev/.github/blob/main/SUPPORT.md)'
       end
@@ -100,11 +100,9 @@ class CommunityChecksTest < Minitest::Test
     end
   end
 
-  def test_accepts_matching_field_reordering
+  def test_accepts_field_reordering
     with_fixture do |root|
-      %w[01-bug.zh-CN.yml 02-bug.en.yml].each do |name|
-        edit_yaml(root, name) { |form| form['body'][1], form['body'][2] = form['body'][2], form['body'][1] }
-      end
+      edit_yaml(root, '01-bug.yml') { |form| form['body'][1], form['body'][2] = form['body'][2], form['body'][1] }
       assert CommunityChecks.check(root)
     end
   end
@@ -130,12 +128,12 @@ class CommunityChecksTest < Minitest::Test
 
   def test_rejects_broken_contracts
     mutations = {
-      'duplicate field IDs' => ['02-bug.en.yml', 'id: expected', 'id: actual'],
-      'required must be boolean' => ['02-bug.en.yml', 'required: true', 'required: "true"'],
-      'Bilingual field mismatch' => ['02-bug.en.yml', 'id: context', 'id: extra-context'],
-      'invalid issue type' => ['02-bug.en.yml', 'type: Bug', 'type: Unknown'],
-      'unsupported form keys' => ['02-bug.en.yml', 'type: Bug', "type: Bug\nlabels: [bug]"],
-      'duplicate YAML keys' => ['02-bug.en.yml', 'type: Bug', "type: Bug\ntype: Feature"],
+      'duplicate field IDs' => ['01-bug.yml', 'id: expected', 'id: actual'],
+      'required must be boolean' => ['01-bug.yml', 'required: true', 'required: "true"'],
+      'required fields changed' => ['01-bug.yml', 'id: expected', 'id: extra-expected'],
+      'invalid issue type' => ['01-bug.yml', 'type: Bug', 'type: Unknown'],
+      'unsupported form keys' => ['01-bug.yml', 'type: Bug', "type: Bug\nlabels: [bug]"],
+      'duplicate YAML keys' => ['01-bug.yml', 'type: Bug', "type: Bug\ntype: Feature"],
       'Keep blank issues available' => ['config.yml', 'blank_issues_enabled: true', 'blank_issues_enabled: false'],
       'Wrong contact destinations' => ['config.yml', 'blob/main/SUPPORT.md', 'blob/main/README.md']
     }

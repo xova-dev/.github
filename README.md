@@ -5,7 +5,7 @@ Organization profile and community defaults for [Xova](https://github.com/xova-d
 Reusable workflows and release tooling live in [xova-dev/actions](https://github.com/xova-dev/actions). See its [project workflow guide](https://github.com/xova-dev/actions/blob/main/docs/project-workflows.md) for integration.
 
 - Organization profile: [`profile/README.md`](profile/README.md)
-- Issue forms and chooser: [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/) (Chinese and English)
+- Issue forms and chooser: [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/) (two bilingual forms)
 - Pull request template: [`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md) (bilingual)
 - Contributing: [English](CONTRIBUTING.md) / [简体中文](CONTRIBUTING.zh-CN.md)
 - Support and project navigation: [`SUPPORT.md`](SUPPORT.md) (bilingual)
@@ -20,7 +20,7 @@ The English `CONTRIBUTING.md` is the default entry point and links explicitly to
 
 `labels.json` lists four optional PR labels with bilingual descriptions: `bug`, `enhancement`, `documentation` and `dependencies`. Use them only for filtering or automation. This reference manifest does not synchronize or delete GitHub labels. Review workflow, bot and release dependencies before cleaning up existing labels.
 
-Issue forms select `Bug` or `Feature` without labels; keep these organization types enabled. Maintainers use the native `Priority` field. Dates and effort are optional. Numbered filenames keep each language pair together in the chooser; blank issues remain available for other work.
+Two bilingual issue forms select `Bug` or `Feature` without labels; keep these organization types enabled. Each form uses English / Chinese labels and short bilingual descriptions; contributors may answer in either language. Maintainers use the native `Priority` field. Dates and effort are optional. Numbered filenames put Bug before Feature; blank issues remain available for other work.
 
 Keep native names stable and use short bilingual descriptions in organization settings:
 
@@ -44,11 +44,11 @@ Use GitHub's default vulnerability report form. Maintainers should verify their 
 
 ## Validation
 
-Run `ruby scripts/check-community.rb` using Ruby's standard library; no dependency installation is needed. The check validates the supported issue-form structure, unique field IDs, bilingual field parity, chooser configuration and local documentation links. It is a repository-specific check, not a replacement for GitHub's own validation. Run `ruby tests/check-community-test.rb` for regression tests using Minitest. The repository's check workflow runs both commands on pull requests and pushes to main; it does not publish or change organization settings.
+Run `ruby scripts/check-community.rb` using Ruby's standard library; no dependency installation is needed. The check validates the supported issue-form structure, unique field IDs, required fields, chooser configuration and local documentation links. It is a repository-specific check, not a replacement for GitHub's own validation. Run `ruby tests/check-community-test.rb` for regression tests using Minitest. The repository's check workflow runs both commands on pull requests and pushes to main; it does not publish or change organization settings.
 
-After publishing to the default branch, open a consuming repository's **New issue** chooser and preview all four forms without submitting an issue. Verify ordering, types, required fields and attachments, and that forms add no labels; confirm security and support links work. Local checks do not establish GitHub UI rendering or real private report delivery.
+After publishing to the default branch, open a consuming repository's **New issue** chooser and preview both forms without submitting an issue. Verify ordering, bilingual text, types, required fields and attachments, and that forms add no labels; confirm security and support links work. Local checks do not establish GitHub UI rendering or real private report delivery.
 
-Form groups, required field sets and required contact destinations are declared together in the checker. Forms cannot set labels. Both translations must keep matching field order and behavior, but may be reordered together. Additional contact links are allowed as long as the support and security destinations remain present.
+Forms, required field sets and required contact destinations are declared together in the checker. Forms cannot set labels; fields may be reordered. Additional contact links are allowed as long as the support and security destinations remain present.
 
 Link checks cover inline links in Markdown documents and issue-form introductions/descriptions, plus contact URLs targeting this repository. Plain and angle-bracket destinations and optional quoted or parenthesized titles are supported. This is not a full Markdown parser: reference-style links, anchor existence and external URL availability are not checked.
 

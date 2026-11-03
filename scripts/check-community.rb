@@ -4,13 +4,13 @@ require 'yaml'
 
 module CommunityChecks
   # Repository policy lives here; structural validation below is shared.
-  FORM_GROUPS = {
+  FORMS = {
     'Bug' => {
-      files: %w[01-bug.zh-CN.yml 02-bug.en.yml],
+      file: '01-bug.yml',
       required: %w[actual expected reproduction version]
     },
     'Feature' => {
-      files: %w[03-feature.zh-CN.yml 04-feature.en.yml],
+      file: '02-feature.yml',
       required: %w[problem outcome]
     }
   }.freeze
@@ -46,7 +46,7 @@ module CommunityChecks
     %w[name description].each do |key|
       require_valid(form[key].is_a?(String) && !form[key].strip.empty?, "#{path}: missing #{key}")
     end
-    require_valid(FORM_GROUPS.key?(form['type']), "#{path}: invalid issue type")
+    require_valid(FORMS.key?(form['type']), "#{path}: invalid issue type")
     body = form['body']
     require_valid(body.is_a?(Array) && body.length > 1, "#{path}: missing body")
     fields = []
@@ -96,25 +96,21 @@ module CommunityChecks
 
   def check(root)
     directory = File.join(root, '.github/ISSUE_TEMPLATE')
-    expected = FORM_GROUPS.values.flat_map { |group| group[:files] } + ['config.yml']
+    expected = FORMS.values.map { |form| form[:file] } + ['config.yml']
     require_valid(Dir.children(directory).sort == expected.sort, 'Unexpected or missing issue templates')
     names = []
-    FORM_GROUPS.each do |type, group|
-      signatures = group[:files].map do |name|
-        path = File.join(directory, name)
-        form = yaml(path)
-        fields = check_form(form, path)
-        require_valid(form['type'] == type, "#{path}: wrong issue type")
-        require_valid(fields.select { |field| field[2] }.map(&:first).sort == group[:required].sort, "#{path}: required fields changed")
-        names << form['name']
-        form['body'].each do |field|
-          field['attributes'].values_at('value', 'description').compact.each do |text|
-            check_markdown(text, root, path)
-          end
+    FORMS.each do |type, policy|
+      path = File.join(directory, policy[:file])
+      form = yaml(path)
+      fields = check_form(form, path)
+      require_valid(form['type'] == type, "#{path}: wrong issue type")
+      require_valid(fields.select { |field| field[2] }.map(&:first).sort == policy[:required].sort, "#{path}: required fields changed")
+      names << form['name']
+      form['body'].each do |field|
+        field['attributes'].values_at('value', 'description').compact.each do |text|
+          check_markdown(text, root, path)
         end
-        fields
       end
-      require_valid(signatures.uniq.length == 1, "#{type}: Bilingual field mismatch")
     end
     require_valid(names.uniq == names, 'Duplicate form names')
     chooser = yaml(File.join(directory, 'config.yml'))
@@ -137,5 +133,5 @@ end
 
 if $PROGRAM_NAME == __FILE__
   CommunityChecks.check(File.expand_path('..', __dir__))
-  puts 'PASS: issue forms, bilingual field contracts, chooser and local documentation links'
+  puts 'PASS: issue forms, required fields, chooser and local documentation links'
 end

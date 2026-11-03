@@ -1,0 +1,67 @@
+name: Bug report / 缺陷报告
+description: Report unexpected behavior / 报告异常行为
+type: Bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Search existing issues and submit in the affected repository. English or Chinese is welcome. Remove sensitive data; report vulnerabilities privately via the [security policy](https://github.com/xova-dev/.github/blob/main/SECURITY.md).
+
+        先搜索已有 Issue，在受影响仓库提交，中文或英文均可。移除敏感数据；漏洞请按[安全政策](https://github.com/xova-dev/.github/blob/main/SECURITY.md)私密报告。
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior / 实际行为
+      description: What happened and who is affected? / 发生了什么，影响了谁？
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior / 预期行为
+      description: What should happen? / 应该发生什么？
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction / 复现条件
+      description: List steps and inputs, or known triggers if intermittent. / 列出步骤与输入；偶发问题请说明已知触发条件。
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version / 版本
+      description: Affected version or commit; say if unknown. / 受影响版本或 commit，未知请说明。
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment / 运行环境
+      description: Relevant OS, runtime, browser and configuration. / 相关操作系统、运行时、浏览器与配置。
+    validations:
+      required: false
+  - type: input
+    id: reproduction-link
+    attributes:
+      label: Reproduction link / 复现链接
+      description: Optional; keep private code private. / 选填，无需公开私有代码。
+    validations:
+      required: false
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / 日志
+      description: Relevant excerpts only, with sensitive data removed. / 仅保留相关片段，移除敏感数据。
+      render: text
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context / 补充信息
+      description: Screenshots, workarounds or other clues. / 截图、临时解决办法或其他线索。
+    validations:
+      required: false

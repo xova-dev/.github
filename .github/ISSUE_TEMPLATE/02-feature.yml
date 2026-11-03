@@ -1,0 +1,38 @@
+name: Feature request / 功能建议
+description: Suggest a feature or improvement / 提出新功能或改进
+type: Feature
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Search existing issues and submit in the affected repository. English or Chinese is welcome. Remove sensitive data; report vulnerabilities privately via the [security policy](https://github.com/xova-dev/.github/blob/main/SECURITY.md).
+
+        先搜索已有 Issue，在受影响仓库提交，中文或英文均可。移除敏感数据；漏洞请按[安全政策](https://github.com/xova-dev/.github/blob/main/SECURITY.md)私密报告。
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / 问题或场景
+      description: Who needs this, and why? / 谁需要，遇到了什么问题？
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome / 期望结果
+      description: What should change? / 希望实现什么变化？
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Approach and alternatives / 方案与替代办法
+      description: Optional ideas or workarounds. / 选填实现思路或临时解决办法。
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: Evidence and constraints / 证据与约束
+      description: Examples, screenshots, links or limits. / 示例、截图、链接或限制。
+    validations:
+      required: false
