@@ -15,7 +15,7 @@ module CommunityChecks
     }
   }.freeze
   DOCUMENT_URL = 'https://github.com/xova-dev/.github/blob/main/'.freeze
-  REQUIRED_CONTACTS = %w[SECURITY.md SUPPORT.md].map { |file| DOCUMENT_URL + file }.freeze
+  REQUIRED_CONTACTS = %w[SUPPORT.md].map { |file| DOCUMENT_URL + file }.freeze
   # Inline links only: plain/angle-bracket destinations, one level of path
   # parentheses, and optional double-, single- or parenthesis-delimited titles.
   INLINE_LINK = /\]\(\s*(?:<([^>\n]+)>|([^\s()]+(?:\([^()\s]*\)[^\s()]*)*))
