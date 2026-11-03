@@ -1,7 +1,6 @@
 name: Feature request (English)
 description: Suggest a new feature or improvement.
 type: Feature
-labels: [enhancement]
 body:
   - type: markdown
     attributes:
@@ -18,27 +17,20 @@ body:
     id: outcome
     attributes:
       label: Desired outcome
-      description: Describe the behavior or outcome you need; an implementation design is not required.
+      description: Describe the behavior or outcome you need.
     validations:
       required: true
   - type: textarea
     id: solution
     attributes:
-      label: Suggested approach
-      description: Describe an approach if you have one; otherwise leave this blank.
-    validations:
-      required: false
-  - type: textarea
-    id: alternatives
-    attributes:
-      label: Alternatives considered
-      description: Describe alternatives considered or current workarounds.
+      label: Approach and alternatives
+      description: Optionally suggest an approach, alternatives or workarounds.
     validations:
       required: false
   - type: textarea
     id: context
     attributes:
-      label: Additional context
-      description: Add examples, screenshots or relevant constraints without sensitive data.
+      label: Evidence and constraints
+      description: Add examples, screenshots, relevant links or constraints as needed.
     validations:
       required: false

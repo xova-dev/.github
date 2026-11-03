@@ -1,7 +1,6 @@
 name: Bug 报告（中文）
 description: 报告异常行为或疑似缺陷。
 type: Bug
-labels: [bug]
 body:
   - type: markdown
     attributes:

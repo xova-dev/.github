@@ -1,17 +1,16 @@
 #!/usr/bin/env ruby
 # Repository-specific contracts for the subset of GitHub Issue Forms we use.
-require 'json'
 require 'yaml'
 
 module CommunityChecks
   # Repository policy lives here; structural validation below is shared.
   FORM_GROUPS = {
     'Bug' => {
-      files: %w[01-bug.zh-CN.yml 02-bug.en.yml], label: 'bug',
+      files: %w[01-bug.zh-CN.yml 02-bug.en.yml],
       required: %w[actual expected reproduction version]
     },
     'Feature' => {
-      files: %w[03-feature.zh-CN.yml 04-feature.en.yml], label: 'enhancement',
+      files: %w[03-feature.zh-CN.yml 04-feature.en.yml],
       required: %w[problem outcome]
     }
   }.freeze
@@ -41,14 +40,13 @@ module CommunityChecks
     YAML.safe_load(source)
   end
 
-  def check_form(form, labels, path)
+  def check_form(form, path)
     require_valid(form.is_a?(Hash), "#{path}: expected a mapping")
-    require_valid((form.keys - %w[name description type labels body]).empty?, "#{path}: unsupported form keys")
+    require_valid((form.keys - %w[name description type body]).empty?, "#{path}: unsupported form keys")
     %w[name description].each do |key|
       require_valid(form[key].is_a?(String) && !form[key].strip.empty?, "#{path}: missing #{key}")
     end
-    expected_label = FORM_GROUPS.dig(form['type'], :label)
-    require_valid(expected_label && form['labels'] == [expected_label] && labels.include?(expected_label), "#{path}: invalid type or labels")
+    require_valid(FORM_GROUPS.key?(form['type']), "#{path}: invalid issue type")
     body = form['body']
     require_valid(body.is_a?(Array) && body.length > 1, "#{path}: missing body")
     fields = []
@@ -97,7 +95,6 @@ module CommunityChecks
   end
 
   def check(root)
-    labels = JSON.parse(File.read(File.join(root, '.github/labels.json'))).map { |label| label.fetch('name') }
     directory = File.join(root, '.github/ISSUE_TEMPLATE')
     expected = FORM_GROUPS.values.flat_map { |group| group[:files] } + ['config.yml']
     require_valid(Dir.children(directory).sort == expected.sort, 'Unexpected or missing issue templates')
@@ -106,7 +103,7 @@ module CommunityChecks
       signatures = group[:files].map do |name|
         path = File.join(directory, name)
         form = yaml(path)
-        fields = check_form(form, labels, path)
+        fields = check_form(form, path)
         require_valid(form['type'] == type, "#{path}: wrong issue type")
         require_valid(fields.select { |field| field[2] }.map(&:first).sort == group[:required].sort, "#{path}: required fields changed")
         names << form['name']
@@ -140,5 +137,5 @@ end
 
 if $PROGRAM_NAME == __FILE__
   CommunityChecks.check(File.expand_path('..', __dir__))
-  puts 'PASS: issue forms, bilingual field contracts, labels, chooser and local documentation links'
+  puts 'PASS: issue forms, bilingual field contracts, chooser and local documentation links'
 end

@@ -10,7 +10,7 @@ Reusable workflows and release tooling live in [xova-dev/actions](https://github
 - Contributing: [English](CONTRIBUTING.md) / [简体中文](CONTRIBUTING.zh-CN.md)
 - Support and project navigation: [`SUPPORT.md`](SUPPORT.md) (bilingual)
 - Private vulnerability reporting policy: [`SECURITY.md`](SECURITY.md) (bilingual)
-- Shared label definitions: [`.github/labels.json`](.github/labels.json)
+- Optional PR labels: [`.github/labels.json`](.github/labels.json)
 
 ## Organization defaults
 
@@ -18,9 +18,23 @@ Once published on the default branch of this public `.github` repository, suppor
 
 The English `CONTRIBUTING.md` is the default entry point and links explicitly to the Chinese guide in this repository. Contributors may use either language.
 
-`labels.json` records twelve shared labels: nine general labels and three priority labels, with colors and bilingual descriptions. It is a reference manifest, not a GitHub-native configuration file, and does not synchronize labels automatically. Configure organization default labels separately for newly created repositories. Existing repositories require a separate, explicitly scoped update; do not delete existing labels without reviewing their usage.
+`labels.json` lists four optional PR labels with bilingual descriptions: `bug`, `enhancement`, `documentation` and `dependencies`. Use them only for filtering or automation. This reference manifest does not synchronize or delete GitHub labels. Review workflow, bot and release dependencies before cleaning up existing labels.
 
-The `bug` and `enhancement` labels must exist in repositories using the issue forms for automatic labeling to work. Forms also select the organization issue types `Bug` and `Feature`; keep those types enabled. Priority remains a maintainer decision. Numbered filenames keep each language pair together in the chooser; blank issues remain available for questions and documentation feedback.
+Issue forms select `Bug` or `Feature` without labels; keep these organization types enabled. Maintainers use the native `Priority` field. Dates and effort are optional. Numbered filenames keep each language pair together in the chooser; blank issues remain available for other work.
+
+Keep native names stable and use short bilingual descriptions in organization settings:
+
+| Type / field | Description |
+| --- | --- |
+| Bug | Unexpected behavior / 行为异常 |
+| Feature | New capability or improvement / 新功能或改进 |
+| Task | Other concrete work / 其他具体工作 |
+| Priority | Work order, not severity / 处理顺序，非严重程度 |
+| Start date | Planned start / 计划开始日期 |
+| Target date | Planned completion / 计划完成日期 |
+| Effort | Estimated work / 预估工作量 |
+
+Priority options: `Urgent` — Immediate attention / 立即处理; `High` — Address next / 优先处理; `Medium` — As planned / 按计划处理; `Low` — When capacity allows / 有余力再处理. Unset means not yet prioritized. Organization settings are managed separately; this repository does not apply them.
 
 ## Security settings
 
@@ -30,11 +44,11 @@ Use GitHub's default vulnerability report form. Maintainers should verify their 
 
 ## Validation
 
-Run `ruby scripts/check-community.rb` using Ruby's standard library; no dependency installation is needed. The check validates the supported issue-form structure, unique field IDs, bilingual field parity, label references, chooser configuration and local documentation links. It is a repository-specific check, not a replacement for GitHub's own validation. Run `ruby tests/check-community-test.rb` for regression tests using Minitest. The repository's check workflow runs both commands on pull requests and pushes to main; it does not publish or change organization settings.
+Run `ruby scripts/check-community.rb` using Ruby's standard library; no dependency installation is needed. The check validates the supported issue-form structure, unique field IDs, bilingual field parity, chooser configuration and local documentation links. It is a repository-specific check, not a replacement for GitHub's own validation. Run `ruby tests/check-community-test.rb` for regression tests using Minitest. The repository's check workflow runs both commands on pull requests and pushes to main; it does not publish or change organization settings.
 
-After publishing to the default branch, open a consuming repository's **New issue** chooser and preview all four forms without submitting an issue. Verify ordering, types, labels, required fields and attachments; confirm security and support links work. Local checks do not establish GitHub UI rendering or real private report delivery.
+After publishing to the default branch, open a consuming repository's **New issue** chooser and preview all four forms without submitting an issue. Verify ordering, types, required fields and attachments, and that forms add no labels; confirm security and support links work. Local checks do not establish GitHub UI rendering or real private report delivery.
 
-Form groups, labels, required field sets and required contact destinations are declared together in the checker. Both translations must keep matching field order and behavior, but may be reordered together. Additional contact links are allowed as long as the support and security destinations remain present.
+Form groups, required field sets and required contact destinations are declared together in the checker. Forms cannot set labels. Both translations must keep matching field order and behavior, but may be reordered together. Additional contact links are allowed as long as the support and security destinations remain present.
 
 Link checks cover inline links in Markdown documents and issue-form introductions/descriptions, plus contact URLs targeting this repository. Plain and angle-bracket destinations and optional quoted or parenthesized titles are supported. This is not a full Markdown parser: reference-style links, anchor existence and external URL availability are not checked.
 

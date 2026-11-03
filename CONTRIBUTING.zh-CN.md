@@ -8,10 +8,14 @@
 
 - 提交前先搜索已有 Issue。
 - 请选择中文或英文 Issue 表单。Bug 报告应包含预期与实际行为、受影响版本和复现步骤；暂时无法稳定复现时，说明已知触发条件。
-- 功能建议应说明问题、期望行为和替代方案。较大改动请先讨论，再开始实现。
+- 功能建议应说明问题和期望结果，方案与替代办法选填。较大改动请先讨论，再开始实现。
 - 日志和示例中请移除凭据、个人信息及私密数据。
 
-表单会设置 `Bug` 或 `Feature` 类型，并保留 `bug` 或 `enhancement` 标签；优先级由维护者另行判断。不适合表单的使用问题或文档反馈请参阅[支持指南](https://github.com/xova-dev/.github/blob/main/SUPPORT.md)，仍可新建空白 Issue。
+表单设置 `Bug` 或 `Feature` 类型，不添加标签。其他具体工作使用 `Task`。不适合表单的使用问题或文档反馈请参阅[支持指南](https://github.com/xova-dev/.github/blob/main/SUPPORT.md)，仍可新建空白 Issue。
+
+维护者使用原生 `Priority` 字段：`Urgent` 需立即处理，`High` 优先处理，`Medium` 按计划处理，`Low` 有余力再处理。未设置表示尚未定级。优先级表示处理顺序，不等同于严重程度。日期和工作量仅在排期需要时填写。
+
+正文记录背景、证据与约束；类型、优先级、负责人和排期使用侧栏字段。关闭 Issue 时说明原因；重复问题应关联原始 Issue。
 
 ## Pull Request
 
@@ -25,15 +29,7 @@
 
 ## 标签
 
-通用标签为 bug、enhancement、documentation、question、dependencies、duplicate、help wanted、invalid 和 wontfix，由维护者按需添加。duplicate 应关联原始 Issue，help wanted 表示欢迎社区协助。以 invalid 或 wontfix 关闭问题时，请简要说明原因；信息不完整不一定代表问题无效，必要时先请求补充信息。
-
-### 优先级
-
-- `priority: high`：阻塞关键工作，需要优先处理。
-- `priority: medium`：常规优先级，按计划处理。
-- `priority: low`：非紧迫改进，有余力再处理。
-
-由维护者为每个 Issue 设置最多一个优先级标签。未标记表示尚未定级，不默认视为 medium。优先级表示处理顺序，而非严重程度；bug 不自动意味着高优先级。Issue 模板不自动添加优先级标签。
+Issue 默认不使用标签。PR 仅在筛选或自动化需要时使用 `bug`、`enhancement`、`documentation` 或 `dependencies`，不要求逐个标记。删除仓库已有标签前，先检查工作流、机器人和发布流程的依赖。
 
 ## 安全问题
 

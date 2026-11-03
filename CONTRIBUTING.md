@@ -8,10 +8,14 @@ Contributions in English or Chinese are welcome. These are organization-wide def
 
 - Search existing issues before opening a new one.
 - Choose a Chinese or English issue form. Bug reports should include expected and actual behavior, the affected version, and reproduction steps or known triggers if reproduction is intermittent.
-- Use a feature request to explain the problem, proposed behavior, and alternatives. Discuss substantial changes before implementing them.
+- Use a feature request to explain the problem and desired outcome; approaches and alternatives are optional. Discuss substantial changes before implementing them.
 - Remove credentials, personal information, and private data from logs and examples.
 
-Forms set the `Bug` or `Feature` issue type and the existing `bug` or `enhancement` label. Maintainers determine priority separately. For questions or documentation feedback that do not fit a form, see the [support guide](https://github.com/xova-dev/.github/blob/main/SUPPORT.md); blank issues remain available.
+Forms set the `Bug` or `Feature` type without labels. Use `Task` for other concrete work. For questions or documentation feedback that do not fit a form, see the [support guide](https://github.com/xova-dev/.github/blob/main/SUPPORT.md); blank issues remain available.
+
+Maintainers use the native `Priority` field: `Urgent` for immediate attention, `High` for work to address next, `Medium` for planned work, and `Low` for work when capacity allows. Unset means not yet prioritized. Priority describes work order, not severity. Dates and effort are optional; fill them only when useful for planning.
+
+Keep context, evidence and constraints in the body; use sidebar fields for type, priority, ownership and scheduling. When closing an issue, explain the decision and link the original if it is a duplicate.
 
 ## Pull requests
 
@@ -25,15 +29,7 @@ Follow repository-specific commit conventions. If none are defined, use Conventi
 
 ## Labels
 
-The shared label set is bug, enhancement, documentation, question, dependencies, duplicate, help wanted, invalid, and wontfix. Maintainers apply labels as appropriate. Use duplicate with a link to the original issue, and help wanted when community assistance is welcome. When closing an issue as invalid or wontfix, briefly explain the reason; an incomplete report alone is not necessarily invalid—ask for clarification when needed.
-
-### Priority
-
-- `priority: high`: blocks key work and should be addressed first.
-- `priority: medium`: normal priority, scheduled as planned.
-- `priority: low`: non-urgent work to address when capacity allows.
-
-Maintainers assign at most one priority label per issue. No priority label means the issue has not yet been prioritized, not that it is medium priority. Priority describes work order rather than severity; a bug is not automatically high priority. Issue templates do not assign priority labels automatically.
+Issues do not use labels by default. PRs may use `bug`, `enhancement`, `documentation` or `dependencies` when filtering or automation needs them; labeling every PR is not required. Check workflow, bot and release dependencies before removing existing repository labels.
 
 ## Security
 

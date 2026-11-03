@@ -1,7 +1,6 @@
 name: Bug report (English)
 description: Report unexpected behavior or a suspected defect.
 type: Bug
-labels: [bug]
 body:
   - type: markdown
     attributes:
