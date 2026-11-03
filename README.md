@@ -17,7 +17,7 @@ Once published on the default branch of this public `.github` repository, suppor
 
 The English `CONTRIBUTING.md` is the default entry point and links explicitly to the Chinese guide in this repository. Contributors may use either language.
 
-This repository defines no shared label set. Add a repository-specific PR label only for an actual filtering or automation need. Review workflow, bot and release dependencies before removing labels, and preserve issue type and priority in native fields.
+The [shared label manifest](.github/labels.json) defines four optional PR labels: `bug`, `enhancement`, `documentation` and `dependencies`. Use them for manual classification, filtering or automation; not every PR needs a label. Keep organization defaults for new repositories and existing repository labels aligned with this manifest. It is a reference file, not an automatic sync mechanism. Review workflow, bot and release dependencies before removing labels, and preserve issue type and priority in native fields.
 
 Two bilingual issue forms select `Bug` or `Feature` without labels; keep these organization types enabled. Each form uses English / Chinese labels and short bilingual descriptions; contributors may answer in either language. Maintainers use the native `Priority` field. Numbered filenames put Bug before Feature; blank issues remain available for other work.
 

@@ -31,7 +31,7 @@ Follow repository-specific commit conventions. If none are defined, use Conventi
 
 ## Labels
 
-Issues and PRs do not use labels by default. Add a repository-specific PR label only when filtering or automation needs it. Before removing labels, check workflow, bot and release dependencies and preserve issue type and priority in native fields.
+Issues do not use labels by default. PRs may use `bug` (fixes), `enhancement` (features or improvements), `documentation` or `dependencies` for classification, filtering or automation. Not every PR needs a label. Before removing labels, check workflow, bot and release dependencies and preserve issue type and priority in native fields.
 
 ## Security
 
